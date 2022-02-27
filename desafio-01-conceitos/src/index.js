@@ -14,8 +14,20 @@ function checksExistsUserAccount(request, response, next) {
   // Complete aqui
 }
 
+function createUser(payload) {
+  return {
+    id: uuidv4(),
+    name: payload.name,
+    username: payload.username,
+    todos: []
+  }
+}
+
 app.post('/users', (request, response) => {
-  // Complete aqui
+  const newUser = createUser(request.body)
+  users.push(newUser)
+
+  response.json(newUser)
 });
 
 app.get('/todos', checksExistsUserAccount, (request, response) => {
